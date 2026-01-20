@@ -5,6 +5,9 @@ format: html
 editor: visual
 editor_options: 
   chunk_output_type: inline
+execute: 
+  echo: false
+  output: true
 ---
 
 ## Introduction
@@ -15,7 +18,7 @@ The purpose of this analysis is to provide a summary of the Surry Runnin' Patrio
 
 ### Data
 
-The season data is taken from nc.milesplit.com. Links to all of the team's meets with results are available on the team page: [Surry Home Educators' Team Page](https://nc.milesplit.com/teams/43163-surry-home-educators). Under schedule, select "Cross Country" and "2025 - 2026." Race times for each meet were copied from team results pages within each meet page and pasted into a Google sheets file for pre-processing, before being downloaded and imported into RStudio. Pre-processing steps are recorded on the final sheet in the google sheets document, after the sets of raw and formatted data for each meet, entitled "Data Log." The Google sheets file is available here: [Surry XC 2025](https://docs.google.com/spreadsheets/d/1SdEel-9QyrGpobxCwcpAQZBhEcIYJkR6yFIiFwF_pzU/edit?usp=sharing). The following columns are used in this analysis: time_h_mm_ss (race time in minutes and seconds), distance (race distance), first_name (runner's first name), place (runner's placement in the race results), division (middle school or high school), sex, and short_race_name (abbreviated name of meet). 
+The season data is taken from nc.milesplit.com. Links to all of the team's meets with results are available on the team page: [Surry Home Educators' Team Page](https://nc.milesplit.com/teams/43163-surry-home-educators). Under schedule, select "Cross Country" and "2025 - 2026." Race times for each meet were copied from team results pages within each meet page and pasted into a Google sheets file for pre-processing, before being downloaded and imported into RStudio. Pre-processing steps are recorded on the final sheet in the google sheets document, after the sets of raw and formatted data for each meet, entitled "Data Log." The Google sheets file is available here: [Surry XC 2025](https://docs.google.com/spreadsheets/d/1SdEel-9QyrGpobxCwcpAQZBhEcIYJkR6yFIiFwF_pzU/edit?usp=sharing). The following columns are used in this analysis: time_h_mm_ss (race time in minutes and seconds), distance (race distance), first_name (runner's first name), place (runner's placement in the race results), division (middle school or high school), sex, and short_race_name (abbreviated name of meet).
 
 ## Preliminary Tasks
 
@@ -24,6 +27,8 @@ The season data is taken from nc.milesplit.com. Links to all of the team's meets
 Load R packages:
 
 ```{r}
+#| ouput: false
+
 library(tidyverse)
 library(janitor)
 library(DescTools)
@@ -110,6 +115,7 @@ Values look good.
 ## High School Boys
 
 **Table of Individual 5K Race Times**
+
 5K is the standard race length for high school runners, and that race length is the focus of the high school boys' analysis.
 
 ```{r}
@@ -172,8 +178,7 @@ race_data |>
 
 Josiah's inaccurate time for the Run4Life meet is filtered out, to provide a more accurate summary of his running season in this plot. Milo's time for the Surry Inv is also left out since it is only one time and doesn't provide a meaningful range and average for this plot.
 
-**Scoring Analysis: Chart of Top Five (Scored) Times for Each 5K Race**
-Each team's top five times are used to score the teams and determine team placements. This is a table of the top five times for each meet, plus the average of those top five times for each meet.
+**Scoring Analysis: Chart of Top Five (Scored) Times for Each 5K Race** Each team's top five times are used to score the teams and determine team placements. This is a table of the top five times for each meet, plus the average of those top five times for each meet.
 
 ```{r}
 race_data |> 
@@ -225,8 +230,7 @@ race_data |>
   head(10)
 ```
 
-**Season Highlights: Individual Race Finishes in the Top Ten**
-All race lengths are included.
+**Season Highlights: Individual Race Finishes in the Top Ten** All race lengths are included.
 
 ```{r}
 race_data |>
@@ -235,8 +239,7 @@ race_data |>
   select(first_name, place, short_race_name)
 ```
 
-**Season Highlights: Strong Finishers**
-*PR in final race(s) (NCHE or HXN Championships)*
+**Season Highlights: Strong Finishers** *PR in final race(s) (NCHE or HXN Championships)*
 
 ```{r}
 race_data |>
@@ -264,8 +267,7 @@ race_data |>
 
 ## High School Girls
 
-**Table of Individual 5K Race Times:**
-5K is the standard race length for high school cross country, and that length is the focus of this analysis.
+**Table of Individual 5K Race Times:** 5K is the standard race length for high school cross country, and that length is the focus of this analysis.
 
 ```{r}
 race_data |>
@@ -370,8 +372,7 @@ race_data |>
   head(10)
 ```
 
-**Season Highlights: Individual Race Finishes in the Top Ten**
-All race lengths included.
+**Season Highlights: Individual Race Finishes in the Top Ten** All race lengths included.
 
 ```{r}
 race_data |>
@@ -380,8 +381,7 @@ race_data |>
   select(first_name, place, short_race_name)
 ```
 
-**Season Highlights: Strong Finishers**
-Runners who ran a PR in the final race(s) of the season (NCHE or HXN Championships).
+**Season Highlights: Strong Finishers** Runners who ran a PR in the final race(s) of the season (NCHE or HXN Championships).
 
 ```{r}
 race_data |>
@@ -394,8 +394,7 @@ race_data |>
   arrange(time_h_mm_ss)
 ```
 
-**Perfect Race Attendance: Runners Who Ran in All Races**
-Not all runners had the option to race in the national championships.
+**Perfect Race Attendance: Runners Who Ran in All Races** Not all runners had the option to race in the national championships.
 
 ```{r}
 race_data |> 
@@ -406,10 +405,10 @@ race_data |>
 ```
 
 ## Middle School Boys
+
 There was only one middle school boy running with Surry in 2025.
 
-**Table of Individual 2-Mile Race Times:**
-Two miles is the standard race length for middle school cross country runners, and that race length is the focus of this analysis.
+**Table of Individual 2-Mile Race Times:** Two miles is the standard race length for middle school cross country runners, and that race length is the focus of this analysis.
 
 ```{r}
 race_data |>
@@ -470,8 +469,7 @@ race_data |>
   head(6)
 ```
 
-**Season Highlights: Individual Race Finishes in the Top Ten**
-All race lengths included.
+**Season Highlights: Individual Race Finishes in the Top Ten** All race lengths included.
 
 ```{r}
 race_data |>
@@ -482,8 +480,7 @@ race_data |>
 
 ## Middle School Girls
 
-**Table of Individual 2-Mile Race Times:**
-The standard race length for middle school cross country runners is 2 miles, and that race length is the focus of this analysis.
+**Table of Individual 2-Mile Race Times:** The standard race length for middle school cross country runners is 2 miles, and that race length is the focus of this analysis.
 
 ```{r}
 race_data |>
@@ -534,8 +531,7 @@ race_data |>
   stat_summary(fun = "mean", geom = "point", shape = 23, size = 3, fill = "white")
 ```
 
-**Scoring Analysis: Chart of Top Five (Scored) Times for Each Race**
-The team score in a cross country race is determined by the placement of the fastest five runners on each time. Their placements are totaled, and the team with the lowest score wins.
+**Scoring Analysis: Chart of Top Five (Scored) Times for Each Race** The team score in a cross country race is determined by the placement of the fastest five runners on each time. Their placements are totaled, and the team with the lowest score wins.
 
 ```{r}
 race_data |> 
@@ -592,8 +588,7 @@ race_data |>
   select(first_name, place, short_race_name)
 ```
 
-**Season Highlights: Strong Finishers**
-Runners who ran a PR in the final race of the season (NCHE Championships)
+**Season Highlights: Strong Finishers** Runners who ran a PR in the final race of the season (NCHE Championships)
 
 ```{r}
 race_data |>
@@ -606,8 +601,7 @@ race_data |>
   arrange(time_h_mm_ss)
 ```
 
-**Season Highlights: Perfect Race Attendance**
-Runners Who Ran in All Races
+**Season Highlights: Perfect Race Attendance** Runners Who Ran in All Races
 
 ```{r}
 race_data |> 

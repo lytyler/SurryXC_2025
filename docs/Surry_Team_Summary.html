@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -157,8 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="preliminary-tasks">Preliminary Tasks</h2>
 <p><em>Load R packages, read in data, combine data files into one data set, and select variables of interest.</em></p>
 <p>Load R packages:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-ouput="false">
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -169,32 +133,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+
 Attaching package: 'janitor'
+
 
 The following objects are masked from 'package:stats':
 
-    chisq.test, fisher.test</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
+    chisq.test, fisher.test
+
+
+
 Attaching package: 'hms'
+
 
 The following object is masked from 'package:lubridate':
 
     hms</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Read in data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>race1_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 1 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 19 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
@@ -205,11 +164,8 @@ lgl  (1): Percentile Ranking
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>race2_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 2 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 21 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 21 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -217,11 +173,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>race3_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 3 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 21 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 21 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -229,11 +182,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>race4_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 4 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 18 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 18 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -241,11 +191,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>race5_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 5 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 17 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 17 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -253,11 +200,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>race6_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 6 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 20 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 20 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -265,11 +209,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>race7_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 7 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 17 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 17 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -277,11 +218,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>race8_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 8 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 18 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 18 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -289,11 +227,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>race9_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 9 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 16 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 16 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -301,11 +236,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>race10_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 10 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 21 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 21 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -313,11 +245,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>race11_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 11 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 19 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 19 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -325,11 +254,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>race12_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 12 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 20 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 20 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -337,11 +263,8 @@ dbl  (2): Place, Race No.
 time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>race13_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Surry XC 2025 - 13 Formatted.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 7 Columns: 14
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (9): Distance, First Name, Last Name, Percentile Ranking, Division, Sex...
@@ -353,13 +276,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 </div>
 <p>Combine data files into one data set limited to the columns to be used in this analysis, and make the column names R friendly:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(race1_data, race2_data, race3_data, race4_data, race5_data, </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                   race6_data, race7_data, race8_data, race9_data, race10_data,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                   race11_data, race12_data, race13_data) <span class="sc">|&gt;</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(time_h_mm_ss, distance, first_name, place, division, sex, short_race_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="data-validation" class="level2">
 <h2 class="anchored" data-anchor-id="data-validation">Data Validation</h2>
@@ -368,7 +284,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <h3 class="anchored" data-anchor-id="check-for-nas">Check for NA’s</h3>
 <p>Count NA’s in the data set:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(race_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -378,7 +293,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <section id="check-for-data-formatting" class="level3">
 <h3 class="anchored" data-anchor-id="check-for-data-formatting">Check for Data Formatting</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(race_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
   time_h_mm_ss distance first_name place division      sex   short_race_name
@@ -392,28 +306,10 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 </div>
 <p>Change column data types as appropriate:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>race_data<span class="sc">$</span>distance <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(race_data<span class="sc">$</span>distance)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>race_data<span class="sc">$</span>division <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(race_data<span class="sc">$</span>division)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>race_data<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(race_data<span class="sc">$</span>sex)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>race_data<span class="sc">$</span>short_race_name <span class="ot">&lt;-</span> <span class="fu">factor</span>(race_data<span class="sc">$</span>short_race_name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Bob Schilly Inv"</span>, </span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"River Run Inv"</span>, </span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"NW Inv"</span>, </span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"Small Team Ch"</span>, </span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"G'boro Glad Inv"</span>,</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"Fisher R Ch"</span>, </span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"Run4Life"</span>, </span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"Phoenix Inv"</span>, </span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"FHE Meet"</span>, </span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"Surry Inv"</span>, </span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"Hagan Stone Cl"</span>, </span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>                                                                          <span class="st">"NCHE Champ"</span>, <span class="st">"Nat'l Champ"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="check-for-reasonable-values" class="level3">
 <h3 class="anchored" data-anchor-id="check-for-reasonable-values">Check for Reasonable Values</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(race_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  time_h_mm_ss             distance   first_name            place       
  Min.   :00:10:22.000000   2mi: 62   Length:234         Min.   :  1.00  
@@ -438,12 +334,9 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </section>
 <section id="high-school-boys" class="level2">
 <h2 class="anchored" data-anchor-id="high-school-boys">High School Boys</h2>
-<p><strong>Table of Individual 5K Race Times</strong> 5K is the standard race length for high school runners, and that race length is the focus of the high school boys’ analysis.</p>
+<p><strong>Table of Individual 5K Race Times</strong></p>
+<p>5K is the standard race length for high school runners, and that race length is the focus of the high school boys’ analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, short_race_name, time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> short_race_name, <span class="at">values_from =</span> time_h_mm_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 13
   first_name `River Run Inv` `NW Inv` `Small Team Ch` `G'boro Glad Inv`
@@ -467,16 +360,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>The NA values in this table indicate that the runner did not run in that race.</p>
 <p><strong>Graph of Individual 5K Race Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(race_data, distance <span class="sc">==</span> <span class="st">"5K"</span> <span class="sc">&amp;</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                sex <span class="sc">==</span> <span class="st">"Boys"</span>),</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> short_race_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">group =</span> first_name, <span class="at">color =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>,</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Meet"</span>,</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Surry XC Fall 2025: High School Boys' Team"</span>,</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"5K Race Times"</span>) <span class="sc">+</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -487,13 +370,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Table of Individual Minimum, Average, and Maximum 5K Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(first_name <span class="sc">==</span> <span class="st">"Josiah"</span> <span class="sc">&amp;</span> short_race_name <span class="sc">==</span> <span class="st">"Run4Life"</span>)) <span class="sc">|&gt;</span> <span class="co">#exclude Josiah's inaccurate time</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">"Fastest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">min</span>(time_h_mm_ss)), <span class="st">"Average_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">mean</span>(time_h_mm_ss)),</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Slowest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">max</span>(time_h_mm_ss))) <span class="sc">|&gt;</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Average_Time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
   first_name Fastest_Time Average_Time Slowest_Time
@@ -511,17 +387,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>Josiah’s inaccurate time for the Run4Life meet is filtered out, to provide a more accurate summary of his running season in this table. Milo’s time for the Surry Inv meet is also left out since it is only one time and doesn’t provide a meaningful range and average.</p>
 <p><strong>Boxplot of 5K Race Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(first_name <span class="sc">==</span> <span class="st">"Josiah"</span> <span class="sc">&amp;</span> short_race_name <span class="sc">==</span> <span class="st">"Run4Life"</span>)) <span class="sc">|&gt;</span> <span class="co">#exclude Josiah's inaccurate time</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">first_name =</span> <span class="fu">factor</span>(first_name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Machen"</span>, <span class="st">"Sam"</span>, <span class="st">"JD"</span>, <span class="st">"Riley"</span>, <span class="st">"Dusty"</span>, <span class="st">"Josiah"</span>, <span class="st">"Joshua"</span>, <span class="st">"Sumner"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> first_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">fill =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Surry XC 2025: High School Boys' Team"</span>,</span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"5K Races: Boxplot of Season Times by Runner"</span>,</span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Runner"</span>, <span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>) <span class="sc">+</span></span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">23</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -533,18 +398,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>Josiah’s inaccurate time for the Run4Life meet is filtered out, to provide a more accurate summary of his running season in this plot. Milo’s time for the Surry Inv is also left out since it is only one time and doesn’t provide a meaningful range and average for this plot.</p>
 <p><strong>Scoring Analysis: Chart of Top Five (Scored) Times for Each 5K Race</strong> Each team’s top five times are used to score the teams and determine team placements. This is a table of the top five times for each meet, plus the average of those top five times for each meet.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">!=</span> <span class="st">"Hagan Stone Cl"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sorter =</span> <span class="fu">HmsToSec</span>(time_h_mm_ss)) <span class="sc">|&gt;</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sorter, <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">position_in_group =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(position_in_group, short_race_name, time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> position_in_group, <span class="at">values_from =</span> time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top5_average =</span> <span class="fu">SecToHms</span>(<span class="fu">mean</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span>, <span class="st">`</span><span class="at">5</span><span class="st">`</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 11 × 7
 # Rowwise:  short_race_name
@@ -567,20 +420,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>The best scored time average for the season was at the National Championship, followed by the Surry Invitational (in which middle school boys runner Milo ran with and had his time scored with the high school team).</p>
 <p><strong>Scoring Analysis: Bar Chart of Sum of Top 5 Times for Each Race</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">!=</span> <span class="st">"Hagan Stone Cl"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sorter =</span> <span class="fu">HmsToSec</span>(time_h_mm_ss)) <span class="sc">|&gt;</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sorter, <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">position_in_group =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> short_race_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">fill =</span> position_in_group)) <span class="sc">+</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Surry XC Fall 2025: High School Boys"</span>, </span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Scoring Analysis"</span>,</span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sum of Top Five Team Race Times (hh:mm:ss)"</span>,</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Meet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -592,11 +431,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>The final three meets show faster summed scoring times than the previous meets. The Hagan Stone Classic meet results were again left out.</p>
 <p><strong>Season Highlights: Fastest 5K Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, time_h_mm_ss, short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
    first_name time_h_mm_ss short_race_name
@@ -615,10 +449,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Individual Race Finishes in the Top Ten</strong> All race lengths are included.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> place <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(place) <span class="sc">|&gt;</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, place, short_race_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   first_name place short_race_name
@@ -636,15 +466,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Strong Finishers</strong> <em>PR in final race(s) (NCHE or HXN Championships)</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(first_name <span class="sc">==</span> <span class="st">"Josiah"</span> <span class="sc">&amp;</span> short_race_name <span class="sc">==</span> <span class="st">"Run4Life"</span>)) <span class="sc">|&gt;</span> <span class="co">#exclude Josiah's inaccurate time</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, time_h_mm_ss, short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">==</span> <span class="st">"Nat'l Champ"</span> <span class="sc">|</span> short_race_name <span class="sc">==</span> <span class="st">"NCHE Champ"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 3
 # Groups:   first_name [7]
@@ -662,11 +483,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>The high school boys did a great job finishing the season strong!</p>
 <p><strong>Perfect Attendance: Runners Who Ran in All Races</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"High School"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span> </span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
 # Groups:   first_name [5]
@@ -684,10 +500,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <h2 class="anchored" data-anchor-id="high-school-girls">High School Girls</h2>
 <p><strong>Table of Individual 5K Race Times:</strong> 5K is the standard race length for high school cross country, and that length is the focus of this analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, short_race_name, time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> short_race_name, <span class="at">values_from =</span> time_h_mm_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 13
   first_name `River Run Inv` `NW Inv` `Small Team Ch` `G'boro Glad Inv`
@@ -706,17 +518,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>NA’s in this table represent runners missing the meet or running in a race of a different length in the meet.</p>
 <p><strong>Graph of Individual 5K Race Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(race_data, division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                distance <span class="sc">==</span> <span class="st">"5K"</span> <span class="sc">&amp;</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>                sex <span class="sc">==</span> <span class="st">"Girls"</span>),</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> short_race_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">group =</span> first_name, <span class="at">color =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>,</span>
-<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Meet"</span>,</span>
-<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Surry XC Fall 2025: High School Girls' Team"</span>,</span>
-<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"5K Race Times"</span>) <span class="sc">+</span></span>
-<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -727,12 +528,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Table of Individual Minimum, Average, and Maximum 5K Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">"Fastest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">min</span>(time_h_mm_ss)), <span class="st">"Average_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">mean</span>(time_h_mm_ss)),</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Slowest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">max</span>(time_h_mm_ss))) <span class="sc">|&gt;</span></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Average_Time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   first_name Fastest_Time Average_Time Slowest_Time
@@ -747,16 +542,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Boxplot of 5K Race Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">first_name =</span> <span class="fu">factor</span>(first_name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Lindsay"</span>, <span class="st">"Ava"</span>, <span class="st">"Ivory"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Alie"</span>, <span class="st">"Tierney"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> first_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">fill =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Surry XC 2025: High School Girls' Team"</span>,</span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"5K Races: Boxplot of Season Times by Runner"</span>,</span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Runner"</span>, <span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>) <span class="sc">+</span></span>
-<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">23</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -767,19 +552,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Scoring Analysis: Table of Top Five (Scored) Times for Each Race</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">!=</span> <span class="st">"River Run Inv"</span> <span class="sc">&amp;</span> short_race_name <span class="sc">!=</span> <span class="st">"FHE Meet"</span> <span class="sc">&amp;</span> short_race_name <span class="sc">!=</span> <span class="st">"Nat'l Champ"</span>) <span class="sc">|&gt;</span> <span class="co">#remove races that didn't have five 5K runners</span></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sorter =</span> <span class="fu">HmsToSec</span>(time_h_mm_ss)) <span class="sc">|&gt;</span></span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sorter, <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">position_in_group =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(position_in_group, short_race_name, time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> position_in_group, <span class="at">values_from =</span> time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top5_average =</span> <span class="fu">SecToHms</span>(<span class="fu">mean</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span>, <span class="st">`</span><span class="at">5</span><span class="st">`</span>)))) <span class="sc">|&gt;</span></span>
-<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 7
   short_race_name `1`    `2`    `3`    `4`    `5`    top5_average
@@ -798,21 +570,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>This team only had six runners, so if two or more were absent or the runners were divided between different races in the same meet there was not a team score. The NCHE Meet (state championship) was the best scoring time average of the year.</p>
 <p><strong>Scoring Analysis: Bar Chart of Sum of Top 5 Times for Each Race</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">!=</span> <span class="st">"River Run Inv"</span> <span class="sc">&amp;</span> short_race_name <span class="sc">!=</span> <span class="st">"FHE Meet"</span> <span class="sc">&amp;</span> short_race_name <span class="sc">!=</span> <span class="st">"Nat'l Champ"</span>) <span class="sc">|&gt;</span> <span class="co">#remove races that didn't have five 5K runners</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sorter =</span> <span class="fu">HmsToSec</span>(time_h_mm_ss)) <span class="sc">|&gt;</span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sorter, <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">position_in_group =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> short_race_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">fill =</span> position_in_group)) <span class="sc">+</span></span>
-<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Surry XC Fall 2025: High School Girls"</span>, </span>
-<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Scoring Analysis"</span>,</span>
-<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sum of Top Five Team Race Times (hh:mm:ss)"</span>,</span>
-<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Meet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -824,11 +581,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>NW Inv (first scored race) and final three races were the lowest time score sum races.</p>
 <p><strong>Season Highlights: Fastest 5K Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, time_h_mm_ss, short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
    first_name time_h_mm_ss short_race_name
@@ -847,10 +599,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Individual Race Finishes in the Top Ten</strong> All race lengths included.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> place <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(place) <span class="sc">|&gt;</span></span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, place, short_race_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
    first_name place short_race_name
@@ -871,14 +619,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Strong Finishers</strong> Runners who ran a PR in the final race(s) of the season (NCHE or HXN Championships).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"5K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, time_h_mm_ss, short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">==</span> <span class="st">"Nat'l Champ"</span> <span class="sc">|</span> short_race_name <span class="sc">==</span> <span class="st">"NCHE Champ"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
 # Groups:   first_name [3]
@@ -891,11 +631,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Perfect Race Attendance: Runners Who Ran in All Races</strong> Not all runners had the option to race in the national championships.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"High School"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span> </span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
 # Groups:   first_name [1]
@@ -910,10 +645,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <p>There was only one middle school boy running with Surry in 2025.</p>
 <p><strong>Table of Individual 2-Mile Race Times:</strong> Two miles is the standard race length for middle school cross country runners, and that race length is the focus of this analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, short_race_name, time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> short_race_name, <span class="at">values_from =</span> time_h_mm_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 7
   first_name `River Run Inv` `NW Inv` `G'boro Glad Inv` `Fisher R Ch` `FHE Meet`
@@ -924,17 +655,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Graph of Individual 2-Mile Race Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(race_data, division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>                distance <span class="sc">==</span> <span class="st">"2mi"</span> <span class="sc">&amp;</span></span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>                sex <span class="sc">==</span> <span class="st">"Boys"</span>),</span>
-<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> short_race_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">group =</span> first_name, <span class="at">color =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>,</span>
-<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Meet"</span>,</span>
-<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Surry XC Fall 2025: Middle School Boys' Team"</span>,</span>
-<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"2-Mile Race Times"</span>) <span class="sc">+</span></span>
-<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -945,12 +665,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Table of Individual Minimum, Average, and Maximum 2-Mile Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">"Fastest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">min</span>(time_h_mm_ss)), <span class="st">"Average_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">mean</span>(time_h_mm_ss)),</span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Slowest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">max</span>(time_h_mm_ss))) <span class="sc">|&gt;</span></span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Average_Time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
   first_name Fastest_Time Average_Time Slowest_Time
@@ -960,16 +674,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Boxplot of 2-Mile Race Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">first_name =</span> <span class="fu">factor</span>(first_name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Milo"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> first_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">fill =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Surry XC 2025: Middle School Boys' Team"</span>,</span>
-<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"2-Mile Races: Boxplot of Season Times by Runner"</span>,</span>
-<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Runner"</span>, <span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>) <span class="sc">+</span></span>
-<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">23</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -980,11 +684,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Fastest 2-Mile Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, time_h_mm_ss, short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   first_name time_h_mm_ss short_race_name
@@ -999,10 +698,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Individual Race Finishes in the Top Ten</strong> All race lengths included.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Boys"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> place <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(place) <span class="sc">|&gt;</span></span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, place, short_race_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   first_name place short_race_name
@@ -1016,10 +711,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 <h2 class="anchored" data-anchor-id="middle-school-girls">Middle School Girls</h2>
 <p><strong>Table of Individual 2-Mile Race Times:</strong> The standard race length for middle school cross country runners is 2 miles, and that race length is the focus of this analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, short_race_name, time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> short_race_name, <span class="at">values_from =</span> time_h_mm_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
   first_name `River Run Inv` `NW Inv` `G'boro Glad Inv` `Fisher R Ch` Run4Life
@@ -1036,17 +727,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Graph of Individual 2-Mile Race Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(race_data, division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>                distance <span class="sc">==</span> <span class="st">"2mi"</span> <span class="sc">&amp;</span></span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>                sex <span class="sc">==</span> <span class="st">"Girls"</span>),</span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> short_race_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">group =</span> first_name, <span class="at">color =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>,</span>
-<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Meet"</span>,</span>
-<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Surry XC Fall 2025: Middle School Girls' Team"</span>,</span>
-<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"2-Mile Race Times"</span>) <span class="sc">+</span></span>
-<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1057,12 +737,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Table of Individual Minimum, Average, and Maximum 2-Mile Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">"Fastest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">min</span>(time_h_mm_ss)), <span class="st">"Average_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">mean</span>(time_h_mm_ss)),</span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Slowest_Time"</span> <span class="ot">=</span> <span class="fu">SecToHms</span>(<span class="fu">max</span>(time_h_mm_ss))) <span class="sc">|&gt;</span></span>
-<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Average_Time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   first_name Fastest_Time Average_Time Slowest_Time
@@ -1077,16 +751,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Boxplot of 2-Mile Race Times by Runner</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">first_name =</span> <span class="fu">factor</span>(first_name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Caroline"</span>, <span class="st">"Lily"</span>, <span class="st">"Jada"</span>, <span class="st">"Madelynn"</span>, <span class="st">"Adah"</span>, <span class="st">"Abigail"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> first_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">fill =</span> first_name)) <span class="sc">+</span></span>
-<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Surry XC 2025: Middle School Girls' Team"</span>,</span>
-<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"2-Mile Races: Boxplot of Season Times by Runner"</span>,</span>
-<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Runner"</span>, <span class="at">y =</span> <span class="st">"time (hh:mm:ss)"</span>) <span class="sc">+</span></span>
-<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">23</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1097,19 +761,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Scoring Analysis: Chart of Top Five (Scored) Times for Each Race</strong> The team score in a cross country race is determined by the placement of the fastest five runners on each time. Their placements are totaled, and the team with the lowest score wins.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">!=</span> <span class="st">"G'boro Glad Inv"</span>) <span class="sc">|&gt;</span> <span class="co">#remove race that didn't have five runners</span></span>
-<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sorter =</span> <span class="fu">HmsToSec</span>(time_h_mm_ss)) <span class="sc">|&gt;</span></span>
-<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sorter, <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">position_in_group =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(position_in_group, short_race_name, time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> position_in_group, <span class="at">values_from =</span> time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb92-12"><a href="#cb92-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top5_average =</span> <span class="fu">SecToHms</span>(<span class="fu">mean</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span>, <span class="st">`</span><span class="at">5</span><span class="st">`</span>)))) <span class="sc">|&gt;</span></span>
-<span id="cb92-13"><a href="#cb92-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 7
   short_race_name `1`    `2`    `3`    `4`    `5`    top5_average
@@ -1126,21 +777,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Scoring Analysis: Bar Chart of Sum of Top 5 Times for Each Race</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">!=</span> <span class="st">"G'boro Glad Inv"</span>) <span class="sc">|&gt;</span> <span class="co">#remove race that didn't have five runners</span></span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sorter =</span> <span class="fu">HmsToSec</span>(time_h_mm_ss)) <span class="sc">|&gt;</span></span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sorter, <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">position_in_group =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> short_race_name, <span class="at">y =</span> time_h_mm_ss, <span class="at">fill =</span> position_in_group)) <span class="sc">+</span></span>
-<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Surry XC Fall 2025: Middle School Girls"</span>, </span>
-<span id="cb94-13"><a href="#cb94-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Scoring Analysis"</span>,</span>
-<span id="cb94-14"><a href="#cb94-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sum of Top Five Team Race Times (hh:mm:ss)"</span>,</span>
-<span id="cb94-15"><a href="#cb94-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Meet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1151,11 +787,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Fastest 2-Mile Times</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"Middle School"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, time_h_mm_ss, short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
    first_name time_h_mm_ss short_race_name
@@ -1174,10 +805,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Individual Race Finishes in the Top Ten</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> place <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(place) <span class="sc">|&gt;</span></span>
-<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, place, short_race_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   first_name place short_race_name
@@ -1187,14 +814,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Strong Finishers</strong> Runners who ran a PR in the final race of the season (NCHE Championships)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"Middle School"</span> <span class="sc">&amp;</span> distance <span class="sc">==</span> <span class="st">"2mi"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span></span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss) <span class="sc">|&gt;</span></span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(first_name, time_h_mm_ss, short_race_name) <span class="sc">|&gt;</span></span>
-<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_race_name <span class="sc">==</span> <span class="st">"NCHE Champ"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(time_h_mm_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
 # Groups:   first_name [2]
@@ -1206,11 +825,6 @@ time (3): Raw Time, Time (h:mm:ss), Pace (h:mm:ss per mile)
 </div>
 <p><strong>Season Highlights: Perfect Race Attendance</strong> Runners Who Ran in All Races</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>race_data <span class="sc">|&gt;</span> </span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Girls"</span> <span class="sc">&amp;</span> division <span class="sc">==</span> <span class="st">"Middle School"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(first_name) <span class="sc">|&gt;</span> </span>
-<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
-<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
 # Groups:   first_name [3]
