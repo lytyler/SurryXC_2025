@@ -5,9 +5,6 @@ format: html
 editor: visual
 editor_options: 
   chunk_output_type: inline
-execute: 
-  echo: false
-  output: true
 ---
 
 ## Introduction
@@ -27,6 +24,7 @@ The season data is taken from nc.milesplit.com. Links to all of the team's meets
 Load R packages:
 
 ```{r}
+#| echo: false
 #| ouput: false
 
 library(tidyverse)
