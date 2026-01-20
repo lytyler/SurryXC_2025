@@ -1,0 +1,618 @@
+---
+title: "Surry Home Educators XC: Fall 2025"
+author: "Lanette Tyler"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: inline
+---
+
+## Introduction
+
+### Purpose
+
+The purpose of this analysis is to provide a summary of the Surry Runnin' Patriots Homeschool Cross Country Team's 2025 season. Visualizations and summary statistics are provided for each team (high school boys, high school girls, middle school boys, and middle school girls).
+
+### Data
+
+The season data is taken from nc.milesplit.com. Links to all of the team's meets with results are available on the team page: [Surry Home Educators' Team Page](https://nc.milesplit.com/teams/43163-surry-home-educators). Under schedule, select "Cross Country" and "2025 - 2026." Race times for each meet were copied from team results pages within each meet page and pasted into a Google sheets file for pre-processing, before being downloaded and imported into RStudio. Pre-processing steps are recorded on the final sheet in the google sheets document, after the sets of raw and formatted data for each meet, entitled "Data Log." The Google sheets file is available here: [Surry XC 2025](https://docs.google.com/spreadsheets/d/1SdEel-9QyrGpobxCwcpAQZBhEcIYJkR6yFIiFwF_pzU/edit?usp=sharing). The following columns are used in this analysis: time_h_mm_ss (race time in minutes and seconds), distance (race distance), first_name (runner's first name), place (runner's placement in the race results), division (middle school or high school), sex, and short_race_name (abbreviated name of meet). 
+
+## Preliminary Tasks
+
+*Load R packages, read in data, combine data files into one data set, and select variables of interest.*
+
+Load R packages:
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(DescTools)
+library(hms)
+library(forcats)
+```
+
+Read in data:
+
+```{r}
+race1_data <- read_csv("Surry XC 2025 - 1 Formatted.csv")
+race2_data <- read_csv("Surry XC 2025 - 2 Formatted.csv")
+race3_data <- read_csv("Surry XC 2025 - 3 Formatted.csv")
+race4_data <- read_csv("Surry XC 2025 - 4 Formatted.csv")
+race5_data <- read_csv("Surry XC 2025 - 5 Formatted.csv")
+race6_data <- read_csv("Surry XC 2025 - 6 Formatted.csv")
+race7_data <- read_csv("Surry XC 2025 - 7 Formatted.csv")
+race8_data <- read_csv("Surry XC 2025 - 8 Formatted.csv")
+race9_data <- read_csv("Surry XC 2025 - 9 Formatted.csv")
+race10_data <- read_csv("Surry XC 2025 - 10 Formatted.csv")
+race11_data <- read_csv("Surry XC 2025 - 11 Formatted.csv")
+race12_data <- read_csv("Surry XC 2025 - 12 Formatted.csv")
+race13_data <- read_csv("Surry XC 2025 - 13 Formatted.csv")
+```
+
+Combine data files into one data set limited to the columns to be used in this analysis, and make the column names R friendly:
+
+```{r}
+race_data <- rbind(race1_data, race2_data, race3_data, race4_data, race5_data, 
+                   race6_data, race7_data, race8_data, race9_data, race10_data,
+                   race11_data, race12_data, race13_data) |>
+  clean_names() |>
+  select(time_h_mm_ss, distance, first_name, place, division, sex, short_race_name)
+```
+
+## Data Validation
+
+*Check for NA's, check data types/formats, and check for reasonable values.*
+
+### Check for NA's
+
+Count NA's in the data set:
+
+```{r}
+sum(is.na(race_data))
+```
+
+There are no NA's in the data set for this analysis.
+
+### Check for Data Formatting
+
+```{r}
+head(race_data)
+```
+
+Change column data types as appropriate:
+
+```{r}
+race_data$distance <- as.factor(race_data$distance)
+race_data$division <- as.factor(race_data$division)
+race_data$sex <- as.factor(race_data$sex)
+race_data$short_race_name <- factor(race_data$short_race_name, levels = c("Bob Schilly Inv", 
+                                                                          "River Run Inv", 
+                                                                          "NW Inv", 
+                                                                          "Small Team Ch", 
+                                                                          "G'boro Glad Inv",
+                                                                          "Fisher R Ch", 
+                                                                          "Run4Life", 
+                                                                          "Phoenix Inv", 
+                                                                          "FHE Meet", 
+                                                                          "Surry Inv", 
+                                                                          "Hagan Stone Cl", 
+                                                                          "NCHE Champ", "Nat'l Champ"))
+```
+
+### Check for Reasonable Values
+
+```{r}
+summary(race_data)
+```
+
+Values look good.
+
+## High School Boys
+
+**Table of Individual 5K Race Times**
+5K is the standard race length for high school runners, and that race length is the focus of the high school boys' analysis.
+
+```{r}
+race_data |>
+  filter(sex == "Boys" & distance == "5K") |>
+  select(first_name, short_race_name, time_h_mm_ss) |>
+  pivot_wider(names_from = short_race_name, values_from = time_h_mm_ss)
+```
+
+Josiah's time recorded for the Run4Life Meet is inaccurate. It is the official time recorded, so it is left in for these calculations, except when otherwise noted.
+
+Milo is a middle school boys runner who ran with the high school boys team in the Surry Invitational, so his time for that race is included in the high school boys analysis.
+
+The NA values in this table indicate that the runner did not run in that race.
+
+**Graph of Individual 5K Race Times**
+
+```{r}
+ggplot(filter(race_data, distance == "5K" &
+                sex == "Boys"),
+       aes(x = short_race_name, y = time_h_mm_ss, group = first_name, color = first_name)) +
+  geom_point() +
+  geom_line() +
+  labs(y = "time (hh:mm:ss)",
+       x = "Meet",
+       title = "Surry XC Fall 2025: High School Boys' Team",
+       subtitle = "5K Race Times") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+**Table of Individual Minimum, Average, and Maximum 5K Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "High School" & sex == "Boys" & distance == "5K") |>
+  filter(!(first_name == "Josiah" & short_race_name == "Run4Life")) |> #exclude Josiah's inaccurate time
+  group_by(first_name) |>
+  summarize("Fastest_Time" = SecToHms(min(time_h_mm_ss)), "Average_Time" = SecToHms(mean(time_h_mm_ss)),
+            "Slowest_Time" = SecToHms(max(time_h_mm_ss))) |>
+  arrange(Average_Time)
+```
+
+Josiah's inaccurate time for the Run4Life meet is filtered out, to provide a more accurate summary of his running season in this table. Milo's time for the Surry Inv meet is also left out since it is only one time and doesn't provide a meaningful range and average.
+
+**Boxplot of 5K Race Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "High School" & sex == "Boys" & distance == "5K") |>
+  filter(!(first_name == "Josiah" & short_race_name == "Run4Life")) |> #exclude Josiah's inaccurate time
+  mutate(first_name = factor(first_name, levels = c("Machen", "Sam", "JD", "Riley", "Dusty", "Josiah", "Joshua", "Sumner"))) |>
+  group_by(first_name) |>
+  ggplot(aes(x = first_name, y = time_h_mm_ss, fill = first_name)) +
+  geom_boxplot() +
+  labs(title = "Surry XC 2025: High School Boys' Team",
+       subtitle = "5K Races: Boxplot of Season Times by Runner",
+       x = "Runner", y = "time (hh:mm:ss)") +
+  stat_summary(fun = "mean", geom = "point", shape = 23, size = 3, fill = "white")
+```
+
+Josiah's inaccurate time for the Run4Life meet is filtered out, to provide a more accurate summary of his running season in this plot. Milo's time for the Surry Inv is also left out since it is only one time and doesn't provide a meaningful range and average for this plot.
+
+**Scoring Analysis: Chart of Top Five (Scored) Times for Each 5K Race**
+Each team's top five times are used to score the teams and determine team placements. This is a table of the top five times for each meet, plus the average of those top five times for each meet.
+
+```{r}
+race_data |> 
+  filter(sex == "Boys" & distance == "5K") |> 
+  filter(short_race_name != "Hagan Stone Cl") |>
+  mutate(sorter = HmsToSec(time_h_mm_ss)) |>
+  group_by(short_race_name) |>
+  arrange(sorter, .by_group = TRUE) |> 
+  slice_head(n=5) |>
+  mutate(position_in_group = row_number()) |>
+  select(position_in_group, short_race_name, time_h_mm_ss) |>
+  pivot_wider(names_from = position_in_group, values_from = time_h_mm_ss) |>
+  rowwise() |>
+  mutate(top5_average = SecToHms(mean(c(`1`, `2`, `3`, `4`, `5`))))
+```
+
+The results for the Hagan Stone Classic meet are left out since the runners were split between the Championship and Junior Varsity races. Not enough were in the Championship race for a team score.
+
+The best scored time average for the season was at the National Championship, followed by the Surry Invitational (in which middle school boys runner Milo ran with and had his time scored with the high school team).
+
+**Scoring Analysis: Bar Chart of Sum of Top 5 Times for Each Race**
+
+```{r}
+race_data |> filter(sex == "Boys" & distance == "5K") |> 
+  filter(short_race_name != "Hagan Stone Cl") |>
+  mutate(sorter = HmsToSec(time_h_mm_ss)) |>
+  group_by(short_race_name) |>
+  arrange(sorter, .by_group = TRUE) |> 
+  slice_head(n=5) |>
+  mutate(position_in_group = row_number()) |>
+  ggplot(aes(x = short_race_name, y = time_h_mm_ss, fill = position_in_group)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Surry XC Fall 2025: High School Boys", 
+       subtitle = "Scoring Analysis",
+       y = "Sum of Top Five Team Race Times (hh:mm:ss)",
+       x = "Meet")
+```
+
+The final three meets show faster summed scoring times than the previous meets. The Hagan Stone Classic meet results were again left out.
+
+**Season Highlights: Fastest 5K Times**
+
+```{r}
+race_data |> 
+  filter(sex == "Boys" & distance == "5K") |>
+  arrange(time_h_mm_ss) |>
+  select(first_name, time_h_mm_ss, short_race_name) |>
+  head(10)
+```
+
+**Season Highlights: Individual Race Finishes in the Top Ten**
+All race lengths are included.
+
+```{r}
+race_data |>
+  filter(sex == "Boys" & division == "High School" & place <= 10) |>
+  arrange(place) |>
+  select(first_name, place, short_race_name)
+```
+
+**Season Highlights: Strong Finishers**
+*PR in final race(s) (NCHE or HXN Championships)*
+
+```{r}
+race_data |>
+  filter(sex == "Boys" & division == "High School" & distance == "5K") |>
+  filter(!(first_name == "Josiah" & short_race_name == "Run4Life")) |> #exclude Josiah's inaccurate time
+  group_by(first_name) |>
+  arrange(time_h_mm_ss) |>
+  slice(1) |>
+  select(first_name, time_h_mm_ss, short_race_name) |>
+  filter(short_race_name == "Nat'l Champ" | short_race_name == "NCHE Champ") |>
+  arrange(time_h_mm_ss)
+```
+
+The high school boys did a great job finishing the season strong!
+
+**Perfect Attendance: Runners Who Ran in All Races**
+
+```{r}
+race_data |> 
+  filter(sex == "Boys" & division == "High School") |> 
+  group_by(first_name) |> 
+  count() |>
+  filter(n >= 12)
+```
+
+## High School Girls
+
+**Table of Individual 5K Race Times:**
+5K is the standard race length for high school cross country, and that length is the focus of this analysis.
+
+```{r}
+race_data |>
+  filter(division == "High School" & sex == "Girls" & distance == "5K") |>
+  select(first_name, short_race_name, time_h_mm_ss) |>
+  pivot_wider(names_from = short_race_name, values_from = time_h_mm_ss)
+```
+
+NA's in this table represent runners missing the meet or running in a race of a different length in the meet.
+
+**Graph of Individual 5K Race Times**
+
+```{r}
+ggplot(filter(race_data, division == "High School" &
+                distance == "5K" &
+                sex == "Girls"),
+       aes(x = short_race_name, y = time_h_mm_ss, group = first_name, color = first_name)) +
+  geom_point() +
+  geom_line() +
+  labs(y = "time (hh:mm:ss)",
+       x = "Meet",
+       title = "Surry XC Fall 2025: High School Girls' Team",
+       subtitle = "5K Race Times") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+**Table of Individual Minimum, Average, and Maximum 5K Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "High School" & sex == "Girls" & distance == "5K") |>
+  group_by(first_name) |>
+  summarize("Fastest_Time" = SecToHms(min(time_h_mm_ss)), "Average_Time" = SecToHms(mean(time_h_mm_ss)),
+            "Slowest_Time" = SecToHms(max(time_h_mm_ss))) |>
+  arrange(Average_Time)
+```
+
+**Boxplot of 5K Race Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "High School" & sex == "Girls" & distance == "5K") |>
+  mutate(first_name = factor(first_name, levels = c("Lindsay", "Ava", "Ivory", "Elizabeth", "Alie", "Tierney"))) |>
+  group_by(first_name) |>
+  ggplot(aes(x = first_name, y = time_h_mm_ss, fill = first_name)) +
+  geom_boxplot() +
+  labs(title = "Surry XC 2025: High School Girls' Team",
+       subtitle = "5K Races: Boxplot of Season Times by Runner",
+       x = "Runner", y = "time (hh:mm:ss)") +
+  stat_summary(fun = "mean", geom = "point", shape = 23, size = 3, fill = "white")
+```
+
+**Scoring Analysis: Table of Top Five (Scored) Times for Each Race**
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & distance == "5K") |> 
+  filter(short_race_name != "River Run Inv" & short_race_name != "FHE Meet" & short_race_name != "Nat'l Champ") |> #remove races that didn't have five 5K runners
+  mutate(sorter = HmsToSec(time_h_mm_ss)) |>
+  group_by(short_race_name) |>
+  arrange(sorter, .by_group = TRUE) |> 
+  slice_head(n=5) |>
+  mutate(position_in_group = row_number()) |>
+  select(position_in_group, short_race_name, time_h_mm_ss) |>
+  pivot_wider(names_from = position_in_group, values_from = time_h_mm_ss) |>
+  rowwise() |>
+  mutate(top5_average = SecToHms(mean(c(`1`, `2`, `3`, `4`, `5`)))) |>
+  ungroup()
+```
+
+This team only had six runners, so if two or more were absent or the runners were divided between different races in the same meet there was not a team score. The NCHE Meet (state championship) was the best scoring time average of the year.
+
+**Scoring Analysis: Bar Chart of Sum of Top 5 Times for Each Race**
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & distance == "5K") |> 
+  filter(short_race_name != "River Run Inv" & short_race_name != "FHE Meet" & short_race_name != "Nat'l Champ") |> #remove races that didn't have five 5K runners
+  mutate(sorter = HmsToSec(time_h_mm_ss)) |>
+  group_by(short_race_name) |>
+  arrange(sorter, .by_group = TRUE) |> 
+  slice_head(n=5) |>
+  mutate(position_in_group = row_number()) |>
+  ggplot(aes(x = short_race_name, y = time_h_mm_ss, fill = position_in_group)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Surry XC Fall 2025: High School Girls", 
+       subtitle = "Scoring Analysis",
+       y = "Sum of Top Five Team Race Times (hh:mm:ss)",
+       x = "Meet")
+```
+
+NW Inv (first scored race) and final three races were the lowest time score sum races.
+
+**Season Highlights: Fastest 5K Times**
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & distance == "5K") |>
+  arrange(time_h_mm_ss) |>
+  select(first_name, time_h_mm_ss, short_race_name) |>
+  head(10)
+```
+
+**Season Highlights: Individual Race Finishes in the Top Ten**
+All race lengths included.
+
+```{r}
+race_data |>
+  filter(sex == "Girls" & division == "High School" & place <= 10) |>
+  arrange(place) |>
+  select(first_name, place, short_race_name)
+```
+
+**Season Highlights: Strong Finishers**
+Runners who ran a PR in the final race(s) of the season (NCHE or HXN Championships).
+
+```{r}
+race_data |>
+  filter(sex == "Girls" & division == "High School" & distance == "5K") |>
+  group_by(first_name) |>
+  arrange(time_h_mm_ss) |>
+  slice(1) |>
+  select(first_name, time_h_mm_ss, short_race_name) |>
+  filter(short_race_name == "Nat'l Champ" | short_race_name == "NCHE Champ") |>
+  arrange(time_h_mm_ss)
+```
+
+**Perfect Race Attendance: Runners Who Ran in All Races**
+Not all runners had the option to race in the national championships.
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & division == "High School") |> 
+  group_by(first_name) |> 
+  count() |>
+  filter(n >= 12)
+```
+
+## Middle School Boys
+There was only one middle school boy running with Surry in 2025.
+
+**Table of Individual 2-Mile Race Times:**
+Two miles is the standard race length for middle school cross country runners, and that race length is the focus of this analysis.
+
+```{r}
+race_data |>
+  filter(division == "Middle School" & sex == "Boys" & distance == "2mi") |>
+  select(first_name, short_race_name, time_h_mm_ss) |>
+  pivot_wider(names_from = short_race_name, values_from = time_h_mm_ss)
+```
+
+**Graph of Individual 2-Mile Race Times**
+
+```{r}
+ggplot(filter(race_data, division == "Middle School" &
+                distance == "2mi" &
+                sex == "Boys"),
+       aes(x = short_race_name, y = time_h_mm_ss, group = first_name, color = first_name)) +
+  geom_point() +
+  geom_line() +
+  labs(y = "time (hh:mm:ss)",
+       x = "Meet",
+       title = "Surry XC Fall 2025: Middle School Boys' Team",
+       subtitle = "2-Mile Race Times") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+**Table of Individual Minimum, Average, and Maximum 2-Mile Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "Middle School" & sex == "Boys" & distance == "2mi") |>
+  group_by(first_name) |>
+  summarize("Fastest_Time" = SecToHms(min(time_h_mm_ss)), "Average_Time" = SecToHms(mean(time_h_mm_ss)),
+            "Slowest_Time" = SecToHms(max(time_h_mm_ss))) |>
+  arrange(Average_Time)
+```
+
+**Boxplot of 2-Mile Race Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "Middle School" & sex == "Boys" & distance == "2mi") |>
+  mutate(first_name = factor(first_name, levels = c("Milo"))) |>
+  group_by(first_name) |>
+  ggplot(aes(x = first_name, y = time_h_mm_ss, fill = first_name)) +
+  geom_boxplot() +
+  labs(title = "Surry XC 2025: Middle School Boys' Team",
+       subtitle = "2-Mile Races: Boxplot of Season Times by Runner",
+       x = "Runner", y = "time (hh:mm:ss)") +
+  stat_summary(fun = "mean", geom = "point", shape = 23, size = 3, fill = "white")
+```
+
+**Season Highlights: Fastest 2-Mile Times**
+
+```{r}
+race_data |> 
+  filter(sex == "Boys" & distance == "2mi") |>
+  arrange(time_h_mm_ss) |>
+  select(first_name, time_h_mm_ss, short_race_name) |>
+  head(6)
+```
+
+**Season Highlights: Individual Race Finishes in the Top Ten**
+All race lengths included.
+
+```{r}
+race_data |>
+  filter(sex == "Boys" & division == "Middle School" & place <= 10) |>
+  arrange(place) |>
+  select(first_name, place, short_race_name)
+```
+
+## Middle School Girls
+
+**Table of Individual 2-Mile Race Times:**
+The standard race length for middle school cross country runners is 2 miles, and that race length is the focus of this analysis.
+
+```{r}
+race_data |>
+  filter(division == "Middle School" & sex == "Girls" & distance == "2mi") |>
+  select(first_name, short_race_name, time_h_mm_ss) |>
+  pivot_wider(names_from = short_race_name, values_from = time_h_mm_ss)
+```
+
+**Graph of Individual 2-Mile Race Times**
+
+```{r}
+ggplot(filter(race_data, division == "Middle School" &
+                distance == "2mi" &
+                sex == "Girls"),
+       aes(x = short_race_name, y = time_h_mm_ss, group = first_name, color = first_name)) +
+  geom_point() +
+  geom_line() +
+  labs(y = "time (hh:mm:ss)",
+       x = "Meet",
+       title = "Surry XC Fall 2025: Middle School Girls' Team",
+       subtitle = "2-Mile Race Times") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+**Table of Individual Minimum, Average, and Maximum 2-Mile Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "Middle School" & sex == "Girls" & distance == "2mi") |>
+  group_by(first_name) |>
+  summarize("Fastest_Time" = SecToHms(min(time_h_mm_ss)), "Average_Time" = SecToHms(mean(time_h_mm_ss)),
+            "Slowest_Time" = SecToHms(max(time_h_mm_ss))) |>
+  arrange(Average_Time)
+```
+
+**Boxplot of 2-Mile Race Times by Runner**
+
+```{r}
+race_data |>
+  filter(division == "Middle School" & sex == "Girls" & distance == "2mi") |>
+  mutate(first_name = factor(first_name, levels = c("Caroline", "Lily", "Jada", "Madelynn", "Adah", "Abigail"))) |>
+  group_by(first_name) |>
+  ggplot(aes(x = first_name, y = time_h_mm_ss, fill = first_name)) +
+  geom_boxplot() +
+  labs(title = "Surry XC 2025: Middle School Girls' Team",
+       subtitle = "2-Mile Races: Boxplot of Season Times by Runner",
+       x = "Runner", y = "time (hh:mm:ss)") +
+  stat_summary(fun = "mean", geom = "point", shape = 23, size = 3, fill = "white")
+```
+
+**Scoring Analysis: Chart of Top Five (Scored) Times for Each Race**
+The team score in a cross country race is determined by the placement of the fastest five runners on each time. Their placements are totaled, and the team with the lowest score wins.
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & division == "Middle School" & distance == "2mi") |> 
+  filter(short_race_name != "G'boro Glad Inv") |> #remove race that didn't have five runners
+  mutate(sorter = HmsToSec(time_h_mm_ss)) |>
+  group_by(short_race_name) |>
+  arrange(sorter, .by_group = TRUE) |> 
+  slice_head(n=5) |>
+  mutate(position_in_group = row_number()) |>
+  select(position_in_group, short_race_name, time_h_mm_ss) |>
+  pivot_wider(names_from = position_in_group, values_from = time_h_mm_ss) |>
+  rowwise() |>
+  mutate(top5_average = SecToHms(mean(c(`1`, `2`, `3`, `4`, `5`)))) |>
+  ungroup()
+```
+
+**Scoring Analysis: Bar Chart of Sum of Top 5 Times for Each Race**
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & division == "Middle School" & distance == "2mi") |> 
+  filter(short_race_name != "G'boro Glad Inv") |> #remove race that didn't have five runners
+  mutate(sorter = HmsToSec(time_h_mm_ss)) |>
+  group_by(short_race_name) |>
+  arrange(sorter, .by_group = TRUE) |> 
+  slice_head(n=5) |>
+  mutate(position_in_group = row_number()) |>
+  ggplot(aes(x = short_race_name, y = time_h_mm_ss, fill = position_in_group)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Surry XC Fall 2025: Middle School Girls", 
+       subtitle = "Scoring Analysis",
+       y = "Sum of Top Five Team Race Times (hh:mm:ss)",
+       x = "Meet")
+```
+
+**Season Highlights: Fastest 2-Mile Times**
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & distance == "2mi" & division == "Middle School") |>
+  arrange(time_h_mm_ss) |>
+  select(first_name, time_h_mm_ss, short_race_name) |>
+  head(10)
+```
+
+**Season Highlights: Individual Race Finishes in the Top Ten**
+
+```{r}
+race_data |>
+  filter(sex == "Girls" & division == "Middle School" & place <= 10) |>
+  arrange(place) |>
+  select(first_name, place, short_race_name)
+```
+
+**Season Highlights: Strong Finishers**
+Runners who ran a PR in the final race of the season (NCHE Championships)
+
+```{r}
+race_data |>
+  filter(sex == "Girls" & division == "Middle School" & distance == "2mi") |>
+  group_by(first_name) |>
+  arrange(time_h_mm_ss) |>
+  slice(1) |>
+  select(first_name, time_h_mm_ss, short_race_name) |>
+  filter(short_race_name == "NCHE Champ") |>
+  arrange(time_h_mm_ss)
+```
+
+**Season Highlights: Perfect Race Attendance**
+Runners Who Ran in All Races
+
+```{r}
+race_data |> 
+  filter(sex == "Girls" & division == "Middle School") |> 
+  group_by(first_name) |> 
+  count() |>
+  filter(n >= 12)
+```
