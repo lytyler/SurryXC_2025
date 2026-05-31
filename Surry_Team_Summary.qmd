@@ -1,7 +1,10 @@
 ---
 title: "Surry Home Educators XC: Fall 2025"
 author: "Lanette Tyler"
-format: html
+format: 
+  html: 
+    df-print: kable
+    toc: true
 editor: visual
 editor_options: 
   chunk_output_type: inline
